@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.MsSql;
-
+using ErpCloud.Api.DTOs;
 namespace ErpCloud.Api.Tests;
 
 public class PurchaseRequestApiTests
@@ -51,9 +51,9 @@ public class PurchaseRequestApiTests
         }
 
         using var response = await client.PostAsJsonAsync(
-            "/api/purchase-requests",
-            new PurchaseRequest(2001, "Mouse", 2)
-        );
+    "/api/purchase-requests",
+    new CreatePurchaseRequestDto("Mouse", 2)
+);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
@@ -64,6 +64,7 @@ public class PurchaseRequestApiTests
         );
 
         Assert.NotNull(saved);
+        Assert.True(saved.Id > 0);
         Assert.Equal("Mouse", saved.ProductName);
         Assert.Equal(2, saved.Quantity);
     }

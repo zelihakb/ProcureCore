@@ -27,14 +27,19 @@ public class PurchaseRequestDatabaseTests
         var options = new DbContextOptionsBuilder<ErpDbContext>()
             .UseSqlServer(connection.ConnectionString)
             .Options;
-
+        int savedId;
         await using (var db = new ErpDbContext(options))
         {
             await db.Database.MigrateAsync();
 
-            db.PurchaseRequests.Add(
-                new PurchaseRequest(1001, "Keyboard", 5)
-            );
+            var request = new PurchaseRequest("Keyboard", 5);
+
+            db.PurchaseRequests.Add(request);
+            await db.SaveChangesAsync();
+
+            Assert.True(request.Id > 0);
+
+            savedId = request.Id;
 
             await db.SaveChangesAsync();
         }
@@ -43,7 +48,7 @@ public class PurchaseRequestDatabaseTests
 
         var saved = await secondDb.PurchaseRequests
             .AsNoTracking()
-            .SingleAsync(r => r.Id == 1001);
+            .SingleAsync(r => r.Id == savedId);
 
         Assert.Equal("Keyboard", saved.ProductName);
         Assert.Equal(5, saved.Quantity);

@@ -24,7 +24,10 @@ namespace ErpCloud.Api.Data.Migrations
             modelBuilder.Entity("ErpCloud.Api.Models.PurchaseRequest", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ProductName")
                         .IsRequired()

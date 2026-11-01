@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ErpCloud.Api.Data.Migrations
 {
     [DbContext(typeof(ErpDbContext))]
-    [Migration("20261024194443_InitialCreate")]
+    [Migration("20261101131647_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,7 +27,10 @@ namespace ErpCloud.Api.Data.Migrations
             modelBuilder.Entity("ErpCloud.Api.Models.PurchaseRequest", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ProductName")
                         .IsRequired()

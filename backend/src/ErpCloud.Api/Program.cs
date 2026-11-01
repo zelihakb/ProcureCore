@@ -16,13 +16,6 @@ app.MapGet("/api/purchase-requests", async (ErpDbContext db) =>
     await db.PurchaseRequests.AsNoTracking().ToListAsync());
 app.MapPost("/api/purchase-requests", async (CreatePurchaseRequestDto request, ErpDbContext db) =>
 {
-    if (request.Id <= 0)
-    {
-        return Results.BadRequest(new
-        {
-            error = "Request ID must be greater than zero."
-        });
-    }
 
     var validationError = PurchaseRequestValidator.Validate(
     request.ProductName,
@@ -31,16 +24,8 @@ app.MapPost("/api/purchase-requests", async (CreatePurchaseRequestDto request, E
 
     if (validationError is not null)
         return Results.BadRequest(new { error = validationError });
-    if (await db.PurchaseRequests.AnyAsync(r => r.Id == request.Id))
-    {
-        return Results.Conflict(new
-        {
-            error = "A purchase request with this ID already exists."
-        });
-    }
 
     var entity = new PurchaseRequest(
-    request.Id,
     request.ProductName,
     request.Quantity
 );

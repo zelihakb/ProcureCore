@@ -36,32 +36,27 @@ function Expect-PostFailure {
 
 $before = [int](Invoke-RestMethod -Uri "$uri/count")
 
-if ($before -eq 0) {
-    throw "At least one existing purchase request is required."
+if ($before -gt 0) {
+    $requests = @(Invoke-RestMethod -Uri $uri)
+    $id = [int]$requests[0].id
+
+    $found = Invoke-RestMethod -Uri "$uri/$id"
+
+    if ([int]$found.id -ne $id) {
+        throw "FAIL GET by ID"
+    }
+
+    Write-Host "PASS GET by ID"
 }
-
-$requests = @(Invoke-RestMethod -Uri $uri)
-$id = [int]$requests[0].id
-
-$found = Invoke-RestMethod -Uri "$uri/$id"
-
-if ([int]$found.id -ne $id) {
-    throw "FAIL GET by ID"
+else {
+    Write-Host "SKIP GET by ID (database is empty)"
 }
-
-Write-Host "PASS GET by ID"
-
-Expect-PostFailure -Name "Duplicate ID" -ExpectedStatus 409 `
-    -Data @{ id = $id; productName = "Mouse"; quantity = 3 }
 
 Expect-PostFailure -Name "Negative quantity" -ExpectedStatus 400 `
-    -Data @{ id = 2002; productName = "Monitor"; quantity = -5 }
+    -Data @{ productName = "Monitor"; quantity = -5 }
 
 Expect-PostFailure -Name "Empty product name" -ExpectedStatus 400 `
-    -Data @{ id = 2003; productName = " "; quantity = 1 }
-
-Expect-PostFailure -Name "Invalid ID" -ExpectedStatus 400 `
-    -Data @{ id = 0; productName = "Keyboard"; quantity = 1 }
+    -Data @{ productName = " "; quantity = 1 }
 
 $after = [int](Invoke-RestMethod -Uri "$uri/count")
 

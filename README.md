@@ -403,6 +403,6 @@ A more detailed technical roadmap may be maintained under `docs/` as the impleme
 
 ## Author
 
-Developed by [@zelihakb](https://github.com/zelihakb) as a hands-on software engineering and data engineering portfolio project.
+Developed by [@zelihakb](https://github.com/zelihakb)
 
-_Last updated: October 25, 2026._
+_Last updated: November 1, 2026._

@@ -16,6 +16,6 @@ public class ErpDbContext : DbContext
     {
         modelBuilder.Entity<PurchaseRequest>()
             .Property(request => request.Id)
-            .ValueGeneratedNever();
+            .UseIdentityColumn();
     }
 }
