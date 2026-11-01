@@ -1,3 +1,4 @@
+using ErpCloud.Api.DTOs;
 using ErpCloud.Api.Data;
 using ErpCloud.Api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ var app = builder.Build();
 app.MapGet("/health", () => "ERP API is running");
 app.MapGet("/api/purchase-requests", async (ErpDbContext db) =>
     await db.PurchaseRequests.AsNoTracking().ToListAsync());
-app.MapPost("/api/purchase-requests", async (PurchaseRequest request, ErpDbContext db) =>
+app.MapPost("/api/purchase-requests", async (CreatePurchaseRequestDto request, ErpDbContext db) =>
 {
     if (request.Id <= 0)
     {
@@ -38,12 +39,16 @@ app.MapPost("/api/purchase-requests", async (PurchaseRequest request, ErpDbConte
         });
     }
 
-    db.PurchaseRequests.Add(request);
+    var entity = new PurchaseRequest(
+    request.Id,
+    request.ProductName,
+    request.Quantity
+);
+
+    db.PurchaseRequests.Add(entity);
     await db.SaveChangesAsync();
-    return Results.Created(
-        $"/api/purchase-requests/{request.Id}",
-        request
-    );
+
+    return Results.Created($"/api/purchase-requests/{entity.Id}", entity);
 });
 app.MapGet("/api/purchase-requests/count", async (ErpDbContext db) =>
     await db.PurchaseRequests.CountAsync());

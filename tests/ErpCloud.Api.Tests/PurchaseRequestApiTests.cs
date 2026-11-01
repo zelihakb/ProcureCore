@@ -57,8 +57,10 @@ public class PurchaseRequestApiTests
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
+        Assert.NotNull(response.Headers.Location);
+
         var saved = await client.GetFromJsonAsync<PurchaseRequest>(
-            "/api/purchase-requests/2001"
+            response.Headers.Location
         );
 
         Assert.NotNull(saved);
