@@ -11,6 +11,8 @@ public class ErpDbContext : DbContext
     }
 
     public DbSet<PurchaseRequest> PurchaseRequests => Set<PurchaseRequest>();
+    public DbSet<Product> Products => Set<Product>();
+    public DbSet<Employee> Employees => Set<Employee>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
