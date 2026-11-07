@@ -13,7 +13,9 @@ var app = builder.Build();
 
 app.MapGet("/health", () => "ERP API is running");
 app.MapGet("/api/purchase-requests", async (ErpDbContext db) =>
-    await db.PurchaseRequests.AsNoTracking().ToListAsync());
+   await db.PurchaseRequests.AsNoTracking()
+    .OrderBy(r => r.Id)
+    .ToListAsync());
 app.MapPost("/api/purchase-requests", async (CreatePurchaseRequestDto request, ErpDbContext db) =>
 {
 
