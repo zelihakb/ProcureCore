@@ -1,14 +1,20 @@
-# Enterprise ERP-to-Cloud Analytics System
+
+# ProcureCore — Kurumsal Satın Alma ERP Sistemi
 
 [English](README.md) | [Türkçe](README.tr.md)
 
-> **Durum: Geliştirme aşamasında — Sprint 2.**
-> SQL Server kalıcılığı ve temel API smoke testleri doğrulandı.
-> **Tamamlananlar** bölümü mevcut sistemi, diğer bölümler ise planlanan geliştirmeleri açıklar.
+> **Durum: Erken Geliştirme Aşaması — MVP Öncesi**
+>
+> SQL Server veri kalıcılığı ve temel API smoke testleri doğrulanmıştır.
+> **Tamamlanan Özellikler** bölümü mevcut işlevleri açıklar.
+> Aksi belirtilmedikçe diğer özellikler planlama aşamasındadır.
 
-Kurumsal bir **satın alma ve stok yönetimi iş akışını** belirli bir kapsamda simüle eden; operasyonel ERP verilerini bulut analitik ortamına taşıyıp Power BI panolarıyla sunmayı hedefleyen uçtan uca bir yazılım ve veri mühendisliği portfolyo projesi.
+ProcureCore; C#, ASP.NET Core, Entity Framework Core ve SQL Server kullanılarak geliştirilen bir kurumsal satın alma ERP projesidir.
 
-Amaç, ticari bir ERP sisteminin tamamını yeniden oluşturmak değil; işlemsel backend, veri mühendisliği hattı ve iş zekâsının **gerçek veri akışlarıyla birbirine bağlandığı, test edilebilir ve tutarlı bir sistem** geliştirmektir.
+Mevcut geliştirme çalışmaları satın alma talebi API'leri, veritabanı kalıcılığı ve Docker tabanlı yerel geliştirme ortamına odaklanmaktadır.
+
+Uzun vadeli hedef; onay iş akışları, tedarikçi yönetimi, bulut veri hatları ve Power BI analizlerini içeren bütünleşik bir satın alma sistemi oluşturmaktır.
+
 
 ## Planlanan Mimari
 
