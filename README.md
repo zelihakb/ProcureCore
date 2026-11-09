@@ -1,15 +1,19 @@
-# Enterprise ERP-to-Cloud Analytics System
+
+# ProcureCore — Enterprise Procurement ERP
 
 [English](README.md) | [Türkçe](README.tr.md)
 
-> **Status: Work in progress — Sprint 2.**
+> **Status: Early Development — Pre-MVP**
+>
 > SQL Server persistence and basic API smoke tests have been verified.
-> The **Implemented** section describes the current application;
-> all other capabilities are planned.
+> The **Implemented** section describes the current functionality.
+> All other capabilities are planned unless explicitly stated otherwise.
 
-An end-to-end engineering portfolio project that models a focused enterprise **procurement and inventory workflow**, moves operational ERP data to a cloud analytics environment, and presents business insights in Power BI.
+ProcureCore is an enterprise procurement ERP project built with C#, ASP.NET Core, Entity Framework Core, and SQL Server.
 
-The objective is not to recreate a commercial ERP, but to develop **one coherent, testable vertical slice** connecting a transactional backend, a data engineering pipeline, and business analytics using real data flows.
+The current implementation focuses on purchase request APIs, database persistence, and Docker-based local development.
+
+The long-term goal is to build an integrated procurement system with approval workflows, supplier management, cloud data pipelines, and Power BI analytics.
 
 ## Planned Architecture
 
